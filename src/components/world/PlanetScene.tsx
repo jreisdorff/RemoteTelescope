@@ -8,6 +8,7 @@ import type { Mesh } from "three";
 interface PlanetSceneProps {
   baseColor: string;
   atmosphereHint: string;
+  hasRvOverlay?: boolean;
 }
 
 function Planet({ baseColor }: { baseColor: string }) {
@@ -36,13 +37,13 @@ function Atmosphere({ baseColor }: { baseColor: string }) {
   );
 }
 
-export function PlanetScene({ baseColor }: PlanetSceneProps) {
+export function PlanetScene({ baseColor, hasRvOverlay = false }: PlanetSceneProps) {
   return (
     <div className="h-[420px] overflow-hidden rounded-lg border border-[var(--border)] bg-black">
       <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }}>
-        <color attach="background" args={["#020408"]} />
-        <ambientLight intensity={0.25} />
-        <directionalLight position={[5, 3, 5]} intensity={1.4} />
+        <color attach="background" args={[hasRvOverlay ? "#08051a" : "#020408"]} />
+        <ambientLight intensity={hasRvOverlay ? 0.35 : 0.25} />
+        <directionalLight position={[5, 3, 5]} intensity={1.4} color={hasRvOverlay ? "#c4b5fd" : "#ffffff"} />
         <Stars radius={80} depth={40} count={3000} factor={3} fade speed={0.5} />
         <Planet baseColor={baseColor} />
         <Atmosphere baseColor={baseColor} />

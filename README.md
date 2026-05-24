@@ -1,13 +1,25 @@
 # RemoteTelescope
 
-Hybrid web app: catoptric observation (L0–L1) with optional remote viewing (L2) and residence (L3).
+Hybrid web app: catoptric observation (L0–L1), text remote viewing (L2), and FEEDBACK archive.
 
-## Milestone 1 (current)
+## Routes
 
-- **Observatory** (`/observatory`) — target catalog and light-lag clock
-- **Reconstruction** (`/world/[targetId]`) — 3D globe and provenance panel
+| Route | Layer |
+|-------|-------|
+| `/observatory` | L0 — catalog, light-lag clock |
+| `/world/[targetId]` | L1 (+ merged L2 qualia) |
+| `/view/[targetId]` | L2 — text viewing chamber |
+| `/archive` | FEEDBACK — qualia ledger + Jupiter observation demo |
 
-Seed targets: Jupiter, K2-Fictional b.
+Seed targets: **Jupiter**, **K2-Fictional b**.
+
+## Loop
+
+1. Observatory → pick a target → reconstruction
+2. **Begin viewing session** → tag qualia (e.g. polar `rings`, Io `volcanic`)
+3. World page shows merged overlay (provisional)
+4. Archive → **Run FEEDBACK** (Jupiter Voyager fixture) → canon or struck
+5. Return to world — provenance updates
 
 ## Develop
 
@@ -16,13 +28,14 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) (redirects to Observatory).
-
-## Test
+## Test & build
 
 ```bash
 npm test
+npm run build
 ```
+
+Data is stored in `data/remote-telescope.db` (gitignored).
 
 ## Docs
 

@@ -23,6 +23,9 @@ export default function RootLayout({
             <Link href="/observatory" className="text-[var(--muted)] no-underline hover:text-[var(--foreground)]">
               Observatory
             </Link>
+            <Link href="/archive" className="text-[var(--muted)] no-underline hover:text-[var(--foreground)]">
+              Archive
+            </Link>
           </nav>
         </header>
         <main className="mx-auto max-w-5xl px-6 py-8">{children}</main>

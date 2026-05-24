@@ -19,3 +19,15 @@ CREATE TABLE IF NOT EXISTS feedback_events (
 
 CREATE INDEX IF NOT EXISTS idx_qualia_anchor ON qualia_packets(anchor_ref);
 CREATE INDEX IF NOT EXISTS idx_qualia_status ON qualia_packets(status);
+
+CREATE TABLE IF NOT EXISTS residence_state (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id TEXT NOT NULL DEFAULT 'default',
+  target_id TEXT NOT NULL,
+  last_location TEXT NOT NULL,
+  a_calendar TEXT NOT NULL,
+  b_calendar TEXT NOT NULL,
+  inventory_json TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE(user_id, target_id)
+);

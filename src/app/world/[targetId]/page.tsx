@@ -4,7 +4,9 @@ import { PlanetScene } from "@/components/world/PlanetScene";
 import { ProvenancePanel } from "@/components/world/ProvenancePanel";
 import { QualiaOverlay } from "@/components/world/QualiaOverlay";
 import { LightLagClock } from "@/components/observatory/LightLagClock";
+import { DEFAULT_USER_ID } from "@/lib/domain/residence-types";
 import { mergeAnchorWithQualia } from "@/lib/domain/merge";
+import { canUnlockResidence } from "@/lib/domain/unlock";
 import { listQualiaByTarget } from "@/lib/db/qualia";
 import { formatLightLag } from "@/lib/format";
 import { getAnchorForTarget } from "@/lib/seed";
@@ -29,6 +31,7 @@ export default async function WorldPage({ params, searchParams }: WorldPageProps
   const experience = mergeAnchorWithQualia(anchor, qualiaPackets);
   const hasRv = experience.layers.includes("L2");
   const layerLabel = hasRv ? "L1+L2 merged" : "optics-only";
+  const residenceUnlocked = canUnlockResidence(DEFAULT_USER_ID, targetId, qualiaPackets);
 
   return (
     <div className="space-y-6">
@@ -79,6 +82,18 @@ export default async function WorldPage({ params, searchParams }: WorldPageProps
         <Link href="/archive" className="rounded-md border border-[var(--border)] px-4 py-2 no-underline">
           Archive →
         </Link>
+        {residenceUnlocked ? (
+          <Link
+            href={`/residence/${targetId}`}
+            className="rounded-md border border-emerald-700/50 bg-emerald-950/40 px-4 py-2 text-emerald-300 no-underline"
+          >
+            Enter residence →
+          </Link>
+        ) : (
+          <span className="rounded-md border border-[var(--border)] px-4 py-2 text-[var(--muted)]">
+            Residence locked (needs canon FEEDBACK)
+          </span>
+        )}
       </div>
     </div>
   );

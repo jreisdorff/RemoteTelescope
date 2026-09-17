@@ -29,3 +29,5 @@ export default function ObservatoryPage() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

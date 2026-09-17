@@ -27,3 +27,5 @@ export default function ArchivePage() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

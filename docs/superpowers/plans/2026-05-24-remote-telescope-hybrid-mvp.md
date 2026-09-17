@@ -1,7 +1,5 @@
 # RemoteTelescope Hybrid MVP Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task.  Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Ship a hybrid web app where users observe targets (L0), walk a reconstructed world (L1), optionally run text remote-viewing sessions (L2), and unlock persistent residence (L3) after FEEDBACK progression.
 
 **Architecture:** Next.js App Router monolith with a shared domain layer (`packages/core` or `src/lib/domain`) holding targets, anchor packets, qualia packets, and merge logic. L0–L1 use React Three Fiber on `/observatory` and `/world/[targetId]`. L2 is a text session route `/view/[targetId]`. L3 is `/residence/[targetId]` with persisted `ExperienceInstance` in SQLite via better-sqlite3 (or Turso for deploy). Archive and FEEDBACK live at `/archive`.
